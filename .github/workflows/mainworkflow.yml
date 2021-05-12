@@ -30,10 +30,13 @@ jobs:
   deploy:
       runs-on: ubuntu-latest
       needs: build
+      if: always()
       steps:
         - run: echo First jobs passed
         - name: Fail this job
+          if: ${{ needs.build.result != 'success' }}
           run: exit 1
+
           
 
 
